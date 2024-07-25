@@ -4,33 +4,27 @@
 		<input
 			type="text"
 			name="name"
-			#gameName
+			[formControl]="name"
 			placeholder="Nombre"
 			class="add-form__input"
 		/>
-		<input
+		<textarea
 			type="text"
-			name="descripcion"
-			#gameDescription
+			name="description"
+			[formControl]="description"
 			placeholder="Descripcion"
 			class="add-form__input"
-		/>
+		></textarea>
 		<input
 			type="number"
 			name="activePlayers"
-			#gameActivePlayers
+			[formControl]="activePlayers"
 			placeholder="Jugadores activos"
 			class="add-form__input"
 		/>
 		<button
 			class="add-form__button"
-			(click)="
-				add(
-					gameName.value,
-					gameDescription.value,
-					+gameActivePlayers.value
-				)
-			"
+			(click)="add(name, description, activePlayers)"
 		>
 			<svg
 				xmlns="http://www.w3.org/2000/svg"

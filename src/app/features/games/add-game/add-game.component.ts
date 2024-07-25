@@ -1,55 +1,63 @@
-import { Component, ElementRef, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+
 import { HttpClientGameService } from '../../../services/games/httpClientGame.service';
 import { GameType } from '../../../configs';
 import { MessageService } from 'src/app/services/message/message.service';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { GameListComponent } from '../game-list/game-list.component';
+import { GameDataService } from 'src/app/services/games/game-data.service';
 @Component({
 	selector: 'app-add-game',
 	templateUrl: './add-game.component.html',
 	styleUrls: ['./add-game.component.scss'],
 	standalone: true,
+	imports: [ReactiveFormsModule],
 })
 export class AddGameComponent {
-	@Input() games: GameType[] = [];
-
-	@ViewChild('gameName') gameName!: ElementRef;
-	@ViewChild('gameDescription') gameDescription!: ElementRef;
-	@ViewChild('gameActivePlayers') gameActivePlayers!: ElementRef;
+	name = new FormControl('');
+	description = new FormControl('');
+	activePlayers = new FormControl(0);
 
 	constructor(
 		private httpClientgameService: HttpClientGameService,
+		private gameDataService: GameDataService,
 		private messageService: MessageService
 	) {}
 
-	add(nombre: string, descripcion: string, activePlayers: number): void {
+	add(
+		name: FormControl,
+		description: FormControl,
+		activePlayers: FormControl
+	): void {
 		try {
-			nombre = nombre.trim();
-			descripcion = descripcion.trim();
-			if (!nombre || !descripcion || !activePlayers) {
+			this.name.setValue(name.value.trim());
+			this.description.setValue(description.value.trim());
+			if (!name || !description || !activePlayers) {
 				this.messageService.add(
 					'Nombre, descripción y jugadores activos son requeridos'
 				);
 				return;
 			}
 
-			this.httpClientgameService
-				.createGame({ nombre, descripcion, activePlayers } as GameType)
-				.subscribe((game) => {
-					if (game !== undefined) {
-						this.games.push(game);
-						this.clearFields();
-					}
-				});
+			this.createGame(name.value, description.value, +activePlayers.value);
 		} catch (error) {
 			console.log(error);
 		}
 	}
 
+	createGame(name: string, description: string, activePlayers: number) {
+		this.httpClientgameService
+			.createGame({ name, description, activePlayers } as GameType)
+			.subscribe((game) => {
+				if (game !== undefined) {
+					this.clearFields();
+					this.gameDataService.sendChanges();
+				}
+			});
+	}
+
 	clearFields(): void {
-		this.gameName.nativeElement.value = '';
-		this.gameDescription.nativeElement.value = '';
-		this.gameActivePlayers.nativeElement.value = '';
+		this.name.setValue('');
+		this.description.setValue('');
+		this.activePlayers.setValue(0);
 	}
 }
