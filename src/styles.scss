@@ -1,0 +1,35 @@
+@import './style/index';
+
+html,
+body {
+	height: 100%;
+}
+body {
+	margin: 0;
+	font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+:root {
+	--color-primary: #{$primary-color};
+	--color-success: #{$success-color};
+	--color-success-light: #{$light-green-color};
+	--color-success-dark: #{$dark-green-color};
+	--color-danger: #{$danger-color};
+	--color-warning: #{$warning-color};
+	--color-light: #{$light-color};
+	--color-dark: #{$dark-color};
+	--color-gray: #{$light-gray-color};
+}
+
+/* 
+
+$primary-color: #1582ff;
+$success-color: #0fa968;
+$light-green-color: #1acd81;
+$danger-color: #df1111;
+$warning-color: #ffee00;
+$light-color: #effef7;
+$dark-green-color: #03301f;
+$text-color: #141414;
+
+*/
