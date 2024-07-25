@@ -1,6 +1,6 @@
 export interface GameType {
 	id: number;
-	nombre: string;
-	descripcion: string;
+	name: string;
+	description: string;
 	activePlayers: number;
 }

@@ -23,19 +23,19 @@ export class AddGameComponent {
 		private messageService: MessageService
 	) {}
 
-	add(nombre: string, descripcion: string, activePlayers: number): void {
+	add(name: string, description: string, activePlayers: number): void {
 		try {
-			nombre = nombre.trim();
-			descripcion = descripcion.trim();
-			if (!nombre || !descripcion || !activePlayers) {
+			name = name.trim();
+			description = description.trim();
+			if (!name || !description || !activePlayers) {
 				this.messageService.add(
-					'Nombre, descripción y jugadores activos son requeridos'
+					'name, descripción y jugadores activos son requeridos'
 				);
 				return;
 			}
 
 			this.httpClientgameService
-				.createGame({ nombre, descripcion, activePlayers } as GameType)
+				.createGame({ name, description, activePlayers } as GameType)
 				.subscribe((game) => {
 					if (game !== undefined) {
 						this.games.push(game);
