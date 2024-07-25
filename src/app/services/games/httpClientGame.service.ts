@@ -26,9 +26,9 @@ export class HttpClientGameService {
 	}
 
 	getGame(id: number): Observable<GameType> {
-		return this.http.get<GameType>(`${this.gamesUrl}/${id}`).pipe(
-			catchError(this.handleError<GameType>(`getGame id=${id}`))
-		);
+		return this.http
+			.get<GameType>(`${this.gamesUrl}/${id}`)
+			.pipe(catchError(this.handleError<GameType>(`getGame id=${id}`)));
 	}
 
 	createGame(game: GameType): Observable<GameType> {

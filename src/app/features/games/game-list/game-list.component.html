@@ -1,7 +1,10 @@
 <ul class="games-list">
 	<h2 class="games-list__title">Juegos</h2>
-	<li *ngFor="let game of games" class="games-list__item">
-		<p class="games-list__text">{{ game.nombre }}</p>
+	<li
+		*ngFor="let game of games; let i = index; trackBy: trackByGames"
+		class="games-list__item"
+	>
+		<p class="games-list__text">{{ game.name }}</p>
 		<aside class="games-list__aside">
 			<a class="games-list__anchor" routerLink="/games/{{ game.id }}">
 				<svg
@@ -47,4 +50,3 @@
 		</aside>
 	</li>
 </ul>
-

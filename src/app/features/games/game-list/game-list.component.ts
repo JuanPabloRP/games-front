@@ -1,16 +1,11 @@
-import {
-	ChangeDetectionStrategy,
-	Component,
-	inject,
-	Input,
-	OnInit,
-} from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 import { GameType } from 'src/app/configs';
+import { GameDataService } from 'src/app/services/games/game-data.service';
 import { HttpClientGameService } from 'src/app/services/games/httpClientGame.service';
-import { MessageService } from 'src/app/services/message/message.service';
+import { concatMap, Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-game-list',
@@ -20,12 +15,42 @@ import { MessageService } from 'src/app/services/message/message.service';
 	imports: [RouterModule, CommonModule],
 })
 export class GameListComponent {
-	@Input() games: GameType[] = [];
+	games: GameType[] = [];
 
-	constructor(private httpClientGameService: HttpClientGameService) {}
+	constructor(
+		private gameDataService: GameDataService,
+		private httpClientGameService: HttpClientGameService
+	) {}
+
+	ngOnInit() {
+		this.getGames();
+		this.listenChangesInGames();
+	}
+
+	httpGetGames$(): Observable<GameType[]> {
+		return this.httpClientGameService.getGames();
+	}
+
+	getGames(): void {
+		this.httpGetGames$().subscribe((games) => this.setGames(games));
+	}
+
+	setGames(games: GameType[]): void {
+		this.games = games;
+	}
+
+	listenChangesInGames(): void {
+		this.gameDataService.changes$
+			.pipe(concatMap(() => this.httpGetGames$()))
+			.subscribe((games) => this.setGames(games));
+	}
 
 	deleteGame(game: GameType): void {
-		this.games = this.games.filter((j) => j !== game);
+		this.games = this.games.filter((g) => g.id !== game.id);
 		this.httpClientGameService.deleteGame(game.id).subscribe();
+	}
+
+	trackByGames(index: number, game: GameType): number {
+		return game.id;
 	}
 }
