@@ -10,7 +10,7 @@
 		/>
 		<input
 			type="text"
-			name="descripcion"
+			name="description"
 			#gameDescription
 			placeholder="Descripcion"
 			class="add-form__input"
@@ -25,11 +25,7 @@
 		<button
 			class="add-form__button"
 			(click)="
-				add(
-					gameName.value,
-					gameDescription.value,
-					+gameActivePlayers.value
-				)
+				add(gameName.value, gameDescription.value, +gameActivePlayers.value)
 			"
 		>
 			<svg
