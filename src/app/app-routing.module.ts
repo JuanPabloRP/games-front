@@ -6,6 +6,7 @@ import { GamesComponent } from './core/features/games/games.component';
 import { IndexComponent } from './core/features/index/index.component';
 import { SignInComponent } from './core/features/auth/sign-in/sign-in.component';
 import { SignUpComponent } from './core/features/auth/sign-up/sign-up.component';
+import { AuthGuard } from './services/guards/auth.guard';
 
 const routes: Routes = [
 	{
@@ -21,6 +22,7 @@ const routes: Routes = [
 			import('./core/features/games/games.component').then(
 				(m) => m.GamesComponent
 			),
+		canActivate: [AuthGuard],
 	},
 	{
 		path: 'auth/signin',

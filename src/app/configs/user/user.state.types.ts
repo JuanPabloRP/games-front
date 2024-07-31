@@ -1,6 +1,8 @@
-export interface GameStateType {
-	user: Object;
-	isAuthenticated: boolean;
+import { UserType } from './user.types';
+
+export interface UserStateType {
+	user: UserType;
 	loading: boolean;
 	error: string;
+	message: string;
 }
