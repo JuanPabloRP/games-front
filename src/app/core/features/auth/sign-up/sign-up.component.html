@@ -1,0 +1,30 @@
+<section class="sign-up-section">
+	<figure class="sign-up-image-container">
+		<img
+			src="../../../../../assets/svg/register.svg"
+			alt="login image"
+			class="sign-up-image"
+		/>
+	</figure>
+	<form class="sign-up">
+		<h1 class="sign-up__title">Registro</h1>
+		<article class="sign-up__input-container">
+			<label for="user" class="sign-up__label">Usuario</label>
+			<input name="user" type="text" class="sign-up__input" />
+		</article>
+		<article class="sign-up__input-container">
+			<label for="user" class="sign-up__label">Contraseña</label>
+			<input name="user" type="password" class="sign-up__input" />
+		</article>
+		<article class="sign-up__input-container">
+			<label for="user" class="sign-up__label">Repetir contraseña</label>
+			<input name="user" type="password" class="sign-up__input" />
+		</article>
+		<button type="button" class="sign-up__button">Regístrarse</button>
+
+		<footer class="sign-up__footer">
+			<span class="sign-up__footer-text">¿Ya tienes una cuenta?, </span>
+			<a routerLink="/auth/signin" class="sign-up__footer-anchor">Inicia sesión</a>
+		</footer>
+	</form>
+</section>

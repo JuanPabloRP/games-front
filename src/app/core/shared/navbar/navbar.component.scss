@@ -1,0 +1,101 @@
+@mixin reset-nav {
+	background-color: var(--rc-color-secondary700);
+	width: 100%;
+	display: flex;
+	position: sticky;
+	position: -webkit-sticky;
+	top: 0;
+	align-items: center;
+	z-index: 100;
+}
+
+@mixin vertical-nav($gap) {
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: $gap;
+	font-size: larger;
+	text-align: center;
+}
+
+@mixin horizontal-nav {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+@mixin reset-list {
+	display: flex;
+	list-style: none;
+}
+
+@mixin vertical-list {
+	gap: 10px;
+}
+
+@mixin horizontal-list {
+	margin-right: 5px;
+}
+
+.nav {
+	@include reset-nav();
+	@include vertical-nav($gap: 10px);
+	font-size: larger;
+	font-weight: bold;
+
+	&__menu-button {
+		background-color: inherit;
+		border: none;
+		outline: none;
+		color: var(--rc-color-white);
+	}
+
+	&__logo-container {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__logo {
+		width: 300px;
+	}
+
+	&__list {
+		@include reset-list();
+		@include vertical-list();
+	}
+
+	&__anchor {
+		text-decoration: none;
+		color: var(--rc-color-white);
+
+		&:hover {
+			color: var(--rc-color-light);
+			border-bottom: 1px solid var(--rc-color-light);
+		}
+
+		&:active {
+			color: var(--rc-color-secondary500);
+		}
+	}
+}
+
+@media (width >= 768px) {
+	.nav {
+		@include horizontal-nav();
+
+		&__logo-container {
+			width: fit-content;
+		}
+
+		&__list {
+			@include reset-list();
+			@include horizontal-list();
+		}
+
+		&__logo {
+			padding: 20px 0;
+		}
+	}
+}
