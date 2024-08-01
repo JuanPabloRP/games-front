@@ -22,9 +22,8 @@ export class SignUpComponent implements OnInit {
 	public password = new FormControl('');
 	public passwordConfirmation = new FormControl('');
 	isAuthenticated: boolean = false;
-
 	loading: boolean = false;
-
+	
 	constructor(
 		private store: Store,
 		private router: Router,
