@@ -79,6 +79,23 @@
 			color: var(--rc-color-secondary500);
 		}
 	}
+
+	&__button {
+		color: var(--rc-color-white);
+		border: none;
+		outline: none;
+		background: inherit;
+		cursor: pointer;
+
+		&:hover {
+			color: var(--rc-color-light);
+			border-bottom: 1px solid var(--rc-color-light);
+		}
+
+		&:active {
+			color: var(--rc-color-secondary500);
+		}
+	}
 }
 
 @media (width >= 768px) {
