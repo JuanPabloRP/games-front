@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { GameDetailComponent } from './core/features/games/game-detail/game-detail.component';
-import { GamesComponent } from './core/features/games/games.component';
 import { IndexComponent } from './core/features/index/index.component';
 import { SignInComponent } from './core/features/auth/sign-in/sign-in.component';
 import { SignUpComponent } from './core/features/auth/sign-up/sign-up.component';
