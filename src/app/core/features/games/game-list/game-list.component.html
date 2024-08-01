@@ -1,0 +1,50 @@
+<div *ngIf="loading$ | async">Cargando...</div>
+<ul *ngIf="!(loading$ | async)" class="games-list">
+	<h2 class="games-list__title">Juegos</h2>
+	<li *ngFor="let game of games$ | async" class="games-list__item">
+		<p class="games-list__text">{{ game.name }}</p>
+		<aside class="games-list__aside">
+			<a class="games-list__anchor" routerLink="/games/{{ game.id }}">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="24"
+					height="24"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					class="icon icon-tabler icons-tabler-outline icon-tabler-edit"
+				>
+					<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+					<path
+						d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1"
+					/>
+					<path
+						d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z"
+					/>
+					<path d="M16 5l3 3" />
+				</svg>
+			</a>
+			<button class="games-list__button" (click)="deleteGame(game)">
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="24"
+					height="24"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					class="icon icon-tabler icons-tabler-outline icon-tabler-circle-minus"
+				>
+					<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+					<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+					<path d="M9 12l6 0" />
+				</svg>
+			</button>
+		</aside>
+	</li>
+</ul>

@@ -1,0 +1,159 @@
+@mixin header-mobile($margin) {
+	display: flex;
+	flex-direction: column;
+	margin: $margin;
+}
+
+.index {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	min-height: 70vh;
+	margin: 5px;
+
+	&__header {
+		@include header-mobile(10px 5px);
+	}
+
+	&__title-container {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+	}
+
+	&__title {
+		font-size: xx-large;
+		text-wrap: pretty;
+	}
+
+	&__subtitle {
+		font-size: medium;
+		font-weight: normal;
+		opacity: 0.85;
+	}
+
+	&__anchor {
+		text-decoration: none;
+		font-size: larger;
+		font-weight: bold;
+		background-color: var(--rc-color-primary);
+		color: var(--rc-color-white);
+		padding: 10px;
+		border-radius: 5px;
+		margin: 10px 0;
+		width: fit-content;
+		height: fit-content;
+
+		&:hover {
+			background-color: var(--rc-color-primary700);
+		}
+	}
+
+	&__image-container {
+		margin: 10px 0;
+	}
+
+	&__card-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+
+	&__card {
+		background-color: var(--rc-color-secondary700);
+		padding: 10px;
+		border-radius: 10px;
+
+		border: 1px solid var(--rc-color-secondary400);
+		max-width: 320px;
+
+		&:hover {
+			background-color: var(--rc-color-secondary600);
+		}
+	}
+
+	&__card-text {
+		opacity: 0.85;
+	}
+}
+
+@media (width >= 768px) {
+	.index {
+		&__header {
+			display: flex;
+			flex-direction: row;
+			text-align: center;
+			justify-content: space-around;
+			gap: 10px;
+		}
+
+		&__title-container {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: center;
+			max-width: 768px;
+		}
+
+		&__title {
+			font-size: 36px;
+		}
+
+		&__subtitle {
+			font-size: 20px;
+		}
+
+		&__image-container {
+			margin: auto;
+		}
+
+		&__image {
+			max-width: 420px;
+		}
+
+		&__card-container {
+			margin-top: 50px;
+		}
+
+		&__card {
+			padding: 15px;
+		}
+	}
+}
+
+@media (width >= 1024px) {
+	.index {
+		&__header {
+			width: 80%;
+			margin: auto;
+			justify-content: center;
+		}
+
+		&__title {
+			font-size: 60px;
+		}
+
+		&__subtitle {
+			font-size: 28px;
+		}
+
+		&__anchor {
+			font-size: x-large;
+		}
+
+		&__card {
+			max-width: 540px;
+		}
+
+		&__card-title {
+			font-size: 28px;
+		}
+
+		&__card-text {
+			font-size: large;
+		}
+	}
+}
