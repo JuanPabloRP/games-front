@@ -35,8 +35,9 @@ export class UserEffects {
 			mergeMap((action) =>
 				this.authService.signIn(action.user).pipe(
 					map(() =>
-						UserActions.signInsuccess({
+						UserActions.signInSuccess({
 							message: 'Ok, se pudo iniciar sesión',
+							user: action.user,
 						})
 					),
 					catchError(() =>

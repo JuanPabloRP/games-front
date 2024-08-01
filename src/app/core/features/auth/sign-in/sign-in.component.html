@@ -1,4 +1,4 @@
-<section></section>
+<section *ngIf="loading">Cargando...</section>
 <section class="sign-in-section">
 	<figure class="sign-in-image-container">
 		<img
@@ -27,7 +27,9 @@
 				[formControl]="password"
 			/>
 		</article>
-		<button type="button" class="sign-in__button" (click)="signIn()" >Inicar sesión</button>
+		<button type="button" class="sign-in__button" (click)="signIn()">
+			Inicar sesión
+		</button>
 
 		<footer class="sign-in__footer">
 			<span class="sign-in__footer-text">¿No tienes una cuenta?, </span>

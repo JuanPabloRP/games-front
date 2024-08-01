@@ -4,7 +4,7 @@ import { UserStateType, UserType } from 'src/app/configs/user';
 import * as UserActions from '../actions/user.actions';
 
 export const initialState: UserStateType = {
-	user: {} as UserType,
+	user: {} as Partial<UserType>,
 	loading: false,
 	error: '',
 	message: '',
@@ -35,18 +35,19 @@ export const userReducer = createReducer(
 	}),
 
 	// Sign In
-	on(UserActions.signIn, (state) => {
+	on(UserActions.signIn, (state, { user }) => {
 		return {
 			...state,
 			loading: true,
 		};
 	}),
-	on(UserActions.signInsuccess, (state, { message }) => {
+	on(UserActions.signInSuccess, (state, { message, user }) => {
+		const partialUser = user as UserType;
 		return {
 			...state,
 			message,
 			loading: false,
-			isAuthenticated: true,
+			user: { user: partialUser, isAuthenticated: true },
 		};
 	}),
 	on(UserActions.signInFailure, (state, { error }) => {

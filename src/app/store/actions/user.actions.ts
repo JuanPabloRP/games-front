@@ -4,7 +4,7 @@ import { UserType } from 'src/app/configs/user';
 // Get game
 export const getUser = createAction(
 	'[User component] getUser',
-	props<{ user: UserType }>()
+	props<{ user: Partial<UserType> }>()
 );
 export const getUserSuccess = createAction(
 	'[User component] getUserSuccess',
@@ -18,11 +18,11 @@ export const getUserFailure = createAction(
 // SignIn
 export const signIn = createAction(
 	'[User component] signIn',
-	props<{ user: UserType }>()
+	props<{ user: Partial<UserType> }>()
 );
-export const signInsuccess = createAction(
+export const signInSuccess = createAction(
 	'[User component] signInSuccess',
-	props<{ message: string }>()
+	props<{ message: string; user: Partial<UserType> }>()
 );
 export const signInFailure = createAction(
 	'[User component] signInFailure',
@@ -32,11 +32,11 @@ export const signInFailure = createAction(
 // SignUp
 export const signUp = createAction(
 	'[User component] signUp',
-	props<{ user: UserType }>()
+	props<{ user: Partial<UserType> }>()
 );
 export const signUpSuccess = createAction(
 	'[User component] signUpSuccess',
-	props<{ user: UserType; message: string }>()
+	props<{ user: Partial<UserType>; message: string }>()
 );
 export const signUpFailure = createAction(
 	'[User component] signUpFailure',
@@ -46,7 +46,7 @@ export const signUpFailure = createAction(
 // SignOut
 export const signOut = createAction(
 	'[User component] signOut',
-	props<{ user: UserType }>()
+	props<{ user: Partial<UserType> }>()
 );
 export const signOutSuccess = createAction(
 	'[User component] signOutSuccess',

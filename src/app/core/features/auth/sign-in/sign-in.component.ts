@@ -7,6 +7,7 @@ import { UserType } from 'src/app/configs/user';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 import * as UserActions from 'src/app/store/actions/user.actions';
+import * as UserSelectors from 'src/app/store/selectors/user.selectors';
 
 @Component({
 	selector: 'app-sign-in',
@@ -18,6 +19,7 @@ import * as UserActions from 'src/app/store/actions/user.actions';
 export class SignInComponent {
 	username = new FormControl('');
 	password = new FormControl('');
+	loading: boolean = false;
 
 	constructor(
 		private store: Store,
@@ -26,6 +28,10 @@ export class SignInComponent {
 	) {}
 
 	ngOnInit() {
+		this.store
+			.select(UserSelectors.selectLoading)
+			.subscribe((loading) => (this.loading = loading));
+
 		this.authService.redirectIfAuthenticated({
 			routes: ['/games'],
 		});
@@ -35,8 +41,22 @@ export class SignInComponent {
 		const user: Partial<UserType> = {
 			username: this.username.value!,
 			password: this.password.value!,
+			isAuthenticated: false,
 		};
 
 		this.store.dispatch(UserActions.signIn({ user }));
+
+		this.clearFields();
+		this.store
+			.select(UserSelectors.selectMessage)
+			.subscribe((message) => console.log(message));
+		this.store
+			.select(UserSelectors.selectError)
+			.subscribe((error) => console.log(error));
+	}
+
+	clearFields(): void {
+		this.username.setValue('');
+		this.password.setValue('');
 	}
 }

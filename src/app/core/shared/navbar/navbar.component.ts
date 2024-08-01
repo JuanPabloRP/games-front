@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
 	isAuthenticated: boolean = false;
-	user: UserType = {} as UserType;
+	user: Partial<UserType> = {} as UserType;
 
 	constructor(
 		public authService: AuthService,
@@ -22,11 +22,11 @@ export class NavbarComponent {
 	) {
 		this.store
 			.select(UserSelectors.selectIsAuthenticated)
-			.subscribe((res) => (this.isAuthenticated = res));
+			.subscribe((res) => (this.isAuthenticated = res!));
 
 		this.store
 			.select(UserSelectors.selectUser)
-			.subscribe((u) => (this.user = u));
+			.subscribe((u) => this.user = u!);
 	}
 
 	singOut() {

@@ -47,7 +47,7 @@ export class SignUpComponent implements OnInit {
 			console.log('Error, las contraseñas son diferentes');
 			return;
 		}
-		const newUser: UserType = {
+		const newUser: Partial<UserType> = {
 			id: Math.floor(Math.random() * 10000000000),
 			username: this.user.value!,
 			password: this.password.value!,

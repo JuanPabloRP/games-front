@@ -22,7 +22,7 @@ export class AuthService {
 	public getIsAuthenticated(): boolean {
 		this.store
 			.select(UserSelectors.selectIsAuthenticated)
-			.subscribe((res) => (this.isAuthenticated = res));
+			.subscribe((res) => (this.isAuthenticated = res!));
 
 		return this.isAuthenticated;
 	}
@@ -39,28 +39,31 @@ export class AuthService {
 
 	// ----------------------
 
-	public getUser(): Observable<UserType> {
+	public getUser(): Observable<Partial<UserType>> {
 		this.userUrlApi = '';
 
-		return this.httpClient.get<UserType>(this.userUrlApi);
+		return this.httpClient.get<Partial<UserType>>(this.userUrlApi);
 	}
 
-	public signIn(user: UserType): Observable<UserType> {
-		this.userUrlApi = '';
+	public signIn(
+		user: Partial<Partial<UserType>>
+	): Observable<Partial<Partial<UserType>>> {
+		this.userUrlApi =
+			'https://run.mocky.io/v3/82a9137e-79fb-4f61-8077-9386473b2975';
 
-		return this.httpClient.post<UserType>(this.userUrlApi, user);
+		return this.httpClient.get<Partial<UserType>>(this.userUrlApi);
 	}
 
-	public signUp(user: UserType): Observable<UserType> {
+	public signUp(user: Partial<UserType>): Observable<Partial<UserType>> {
 		this.userUrlApi =
 			'https://run.mocky.io/v3/7542e2b4-49a9-4ca4-82b2-b61f959e9dcf';
-		return this.httpClient.post<UserType>(this.userUrlApi, user);
+		return this.httpClient.post<Partial<UserType>>(this.userUrlApi, user);
 	}
 
-	public signOut(user: UserType): Observable<UserType> {
+	public signOut(user: Partial<UserType>): Observable<Partial<UserType>> {
 		this.userUrlApi =
 			'https://run.mocky.io/v3/6b992066-d14f-4c7c-a188-32d725d1d253';
 
-		return this.httpClient.post<UserType>(this.userUrlApi, user);
+		return this.httpClient.post<Partial<UserType>>(this.userUrlApi, user);
 	}
 }

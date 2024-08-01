@@ -1,7 +1,7 @@
 import { UserType } from './user.types';
 
 export interface UserStateType {
-	user: UserType;
+	user: Partial<UserType>;
 	loading: boolean;
 	error: string;
 	message: string;
