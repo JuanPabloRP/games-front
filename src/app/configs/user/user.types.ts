@@ -5,7 +5,7 @@ export interface UserType {
 	id: number;
 	username: string;
 	password: string;
-	role: typeof USER_ROLE;
+	role: USER_ROLE;
 	isAuthenticated: boolean;
 	//gamesCreated: GameType[];
 }

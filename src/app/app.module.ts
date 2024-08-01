@@ -21,19 +21,18 @@ import { FooterComponent } from './core/shared/footer/footer.component';
 import { AuthComponent } from './core/features/auth/auth.component';
 import { PublicLayoutComponent } from './core/layouts/public-layout/public-layout.component';
 import { PrivateLayoutComponent } from './core/layouts/private-layout/private-layout.component';
+import { UserEffects } from './store/effects/user.effects';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		MessagesComponent,
-		SignInComponent,
-		SignUpComponent,
 		IndexComponent,
 		NavbarComponent,
 		FooterComponent,
 		AuthComponent,
-  PublicLayoutComponent,
-  PrivateLayoutComponent,
+		PublicLayoutComponent,
+		PrivateLayoutComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -41,7 +40,7 @@ import { PrivateLayoutComponent } from './core/layouts/private-layout/private-la
 		HttpClientModule,
 		FormsModule,
 		StoreModule.forRoot(ROOT_REDUCERS),
-		EffectsModule.forRoot([GamesEffects]),
+		EffectsModule.forRoot([GamesEffects, UserEffects]),
 		StoreDevtoolsModule.instrument({ name: 'TEST' }),
 	],
 	providers: [],

@@ -6,7 +6,7 @@ export const getUser = createAction(
 	'[User component] getUser',
 	props<{ user: UserType }>()
 );
-export const getUsersuccess = createAction(
+export const getUserSuccess = createAction(
 	'[User component] getUserSuccess',
 	props<{ message: string }>()
 );
@@ -34,9 +34,9 @@ export const signUp = createAction(
 	'[User component] signUp',
 	props<{ user: UserType }>()
 );
-export const signUpsuccess = createAction(
+export const signUpSuccess = createAction(
 	'[User component] signUpSuccess',
-	props<{ message: string }>()
+	props<{ user: UserType; message: string }>()
 );
 export const signUpFailure = createAction(
 	'[User component] signUpFailure',
@@ -48,7 +48,7 @@ export const signOut = createAction(
 	'[User component] signOut',
 	props<{ user: UserType }>()
 );
-export const signOutsuccess = createAction(
+export const signOutSuccess = createAction(
 	'[User component] signOutSuccess',
 	props<{ message: string }>()
 );

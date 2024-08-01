@@ -59,11 +59,18 @@
 			<li class="nav__list-item">
 				<a routerLink="/" class="nav__anchor">Inicio</a>
 			</li>
-			<li class="nav__list-item">
+			<li class="nav__list-item" *ngIf="!isAuthenticated">
 				<a routerLink="/auth/signin" class="nav__anchor">Iniciar sesión</a>
 			</li>
-			<li class="nav__list-item">
+			<li class="nav__list-item" *ngIf="!isAuthenticated">
 				<a routerLink="/auth/signup" class="nav__anchor">Registrarse</a>
+			</li>
+			<li class="nav__list-item" *ngIf="isAuthenticated">
+				<a routerLink="/games" class="nav__anchor">Juegos</a>
+			</li>
+			<!-- TODO Cambiar a botón y hacerle la lógica para borrar el user del estado y lo otro que haga falta xd -->
+			<li class="nav__list-item" *ngIf="isAuthenticated">
+				<button class="nav__button" (click)="(singOut())">Cerrar sesión</button>
 			</li>
 		</ul>
 	</section>

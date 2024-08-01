@@ -13,7 +13,7 @@ export class UserEffects {
 			mergeMap((action) =>
 				this.authService.getUser().pipe(
 					map(() =>
-						UserActions.getUsersuccess({
+						UserActions.getUserSuccess({
 							message: 'Ok, se pudo obtener el usuario',
 						})
 					),
@@ -56,11 +56,13 @@ export class UserEffects {
 			ofType(UserActions.signUp),
 			mergeMap((action) =>
 				this.authService.signUp(action.user).pipe(
-					map(() =>
-						UserActions.signUpsuccess({
+					map(() => {
+						console.log(action.user);
+						return UserActions.signUpSuccess({
+							user: action.user,
 							message: 'Ok, se pudo registrar el usuario',
-						})
-					),
+						});
+					}),
 					catchError(() =>
 						of(
 							UserActions.signUpFailure({
@@ -79,7 +81,7 @@ export class UserEffects {
 			mergeMap((action) =>
 				this.authService.signOut(action.user).pipe(
 					map(() =>
-						UserActions.signOutsuccess({
+						UserActions.signOutSuccess({
 							message: 'Ok, se pudo cerrar sesión',
 						})
 					),

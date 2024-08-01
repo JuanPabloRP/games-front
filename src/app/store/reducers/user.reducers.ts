@@ -5,7 +5,7 @@ import * as UserActions from '../actions/user.actions';
 
 export const initialState: UserStateType = {
 	user: {} as UserType,
-	loading: true,
+	loading: false,
 	error: '',
 	message: '',
 };
@@ -19,17 +19,17 @@ export const userReducer = createReducer(
 			loading: true,
 		};
 	}),
-	on(UserActions.getUsersuccess, (state, { message }) => {
+	on(UserActions.getUserSuccess, (state, { message }) => {
 		return {
 			...state,
 			message,
-			loading: true,
+			loading: false,
 		};
 	}),
 	on(UserActions.getUserFailure, (state, { error }) => {
 		return {
 			...state,
-			loading: true,
+			loading: false,
 			error,
 		};
 	}),
@@ -45,37 +45,37 @@ export const userReducer = createReducer(
 		return {
 			...state,
 			message,
-			loading: true,
+			loading: false,
 			isAuthenticated: true,
 		};
 	}),
 	on(UserActions.signInFailure, (state, { error }) => {
 		return {
 			...state,
-			loading: true,
+			loading: false,
 			error,
 		};
 	}),
 
 	// Sign Up
-	on(UserActions.signUp, (state) => {
+	on(UserActions.signUp, (state, { user }) => {
 		return {
 			...state,
 			loading: true,
 		};
 	}),
-	on(UserActions.signUpsuccess, (state, { message }) => {
+	on(UserActions.signUpSuccess, (state, { user, message }) => {
 		return {
 			...state,
 			message,
-			loading: true,
-			isAuthenticated: true,
+			loading: false,
+			user: { ...user, isAuthenticated: true },
 		};
 	}),
 	on(UserActions.signUpFailure, (state, { error }) => {
 		return {
 			...state,
-			loading: true,
+			loading: false,
 			error,
 		};
 	}),
@@ -87,18 +87,18 @@ export const userReducer = createReducer(
 			loading: true,
 		};
 	}),
-	on(UserActions.signOutsuccess, (state, { message }) => {
+	on(UserActions.signOutSuccess, (state, { message }) => {
 		return {
 			...state,
 			message,
-			loading: true,
-			isAuthenticated: false,
+			loading: false,
+			user: { ...state.user, isAuthenticated: false },
 		};
 	}),
 	on(UserActions.signOutFailure, (state, { error }) => {
 		return {
 			...state,
-			loading: true,
+			loading: false,
 			error,
 		};
 	})
