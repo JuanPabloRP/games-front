@@ -1,10 +1,8 @@
 import { Component, ElementRef, Input, Output, ViewChild } from '@angular/core';
 import { HttpClientGameService } from '../../../services/games/httpClientGame.service';
-import { GameType } from '../../../configs';
+import { GameType } from '../../../configs/game';
 import { MessageService } from 'src/app/services/message/message.service';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { GameListComponent } from '../game-list/game-list.component';
+
 @Component({
 	selector: 'app-add-game',
 	templateUrl: './add-game.component.html',

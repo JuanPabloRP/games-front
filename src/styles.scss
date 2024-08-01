@@ -2,7 +2,8 @@
 
 html,
 body {
-	height: 100%;
+	min-height: 100vh;
+	background-color: var(--rc-color-secondary);
 }
 body {
 	margin: 0;
@@ -19,6 +20,75 @@ body {
 	--color-light: #{$light-color};
 	--color-dark: #{$dark-color};
 	--color-gray: #{$light-gray-color};
+
+	--rc-color-primary: #da0200;
+	--rc-color-secondary: #008383;
+	--rc-color-complementary: #af0063;
+	--rc-color-white: #ffffff;
+	--rc-color-black: #000000;
+	--rc-color-error: #ffcdd2;
+	--rc-color-success: #baf1c6;
+	--rc-color-warning: #ffdd83;
+	--rc-color-errorText: #aa021e;
+	--rc-color-successText: #395f41;
+	--rc-color-warningText: #815f03;
+	--rc-color-light: #ebecf0;
+	--rc-color-dark: #333333;
+	--rc-color-primary50: #ffcdd2;
+	--rc-color-primary100: #e57373;
+	--rc-color-primary200: #f44336;
+	--rc-color-primary300: #e53935;
+	--rc-color-primary400: #ff0000;
+	--rc-color-primary600: #bc0909;
+	--rc-color-primary700: #b00707;
+	--rc-color-primary800: #900404;
+	--rc-color-primary900: #700202;
+	--rc-color-secondary50: #e6fcfa;
+	--rc-color-secondary100: #c7f3ef;
+	--rc-color-secondary200: #82dad2;
+	--rc-color-secondary300: #2bbcae;
+	--rc-color-secondary400: #009688;
+	--rc-color-secondary600: #006a6a;
+	--rc-color-secondary700: #015757;
+	--rc-color-secondary800: #013636;
+	--rc-color-secondary900: #012222;
+	--rc-color-complementary50: #fce4ec;
+	--rc-color-complementary100: #f8bbd0;
+	--rc-color-complementary200: #f48fb1;
+	--rc-color-complementary300: #ec407a;
+	--rc-color-complementary400: #d61a5e;
+	--rc-color-complementary600: #8f0d57;
+	--rc-color-complementary700: #8e0050;
+	--rc-color-complementary800: #66013a;
+	--rc-color-complementary900: #460228;
+	--rc-color-gray1: #e2e3e8;
+	--rc-color-gray2: #bdbdbd;
+	--rc-color-gray3: #5a5a5a;
+	--rc-color-gray4: #333333;
+	--rc-color-lightCards: #f1f1f1;
+	--rc-color-highlight: #e4e6ed;
+	--rc-color-grayClear: #f9f9f9;
+	--rc-color-blue: #018fbc;
+	--rc-font-primary: Barlow, sans-serif;
+	--rc-font-display: Poppins, sans-serif;
+	--rc-tiny-font-size: 0.75rem;
+	--rc-tiny-line-height: 1rem;
+	--rc-small-font-size: 0.875rem;
+	--rc-small-line-height: 1.25rem;
+	--rc-base-font-size: 1rem;
+	--rc-base-line-height: 1.5rem;
+	--rc-thumb-font-size: 1.125rem;
+	--rc-thumb-line-height: 1.625rem;
+	--rc-half-font-size: 1.25rem;
+	--rc-half-line-height: 1.5rem;
+	--rc-medium-font-size: 1.5rem;
+	--rc-medium-line-height: 2rem;
+	--rc-large-font-size: 1.625rem;
+	--rc-large-line-height: 2.125rem;
+	--rc-x-large-font-size: 2.188rem;
+	--rc-x-large-line-height: 3rem;
+	--rc-huge-font-size: 3rem;
+	--rc-huge-line-height: 4rem;
 }
 
 /* 
