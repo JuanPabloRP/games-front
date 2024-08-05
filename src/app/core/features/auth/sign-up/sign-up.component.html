@@ -1,4 +1,4 @@
-<template *ngIf="loading">Cargando...</template>
+<template *ngIf="loading" class="sign-up-loading-template">Cargando...</template>
 <ng-template *ngIf="error"></ng-template>
 <section class="sign-up-section" *ngIf="!loading || !error">
 	<figure class="sign-up-image-container">
@@ -64,7 +64,7 @@
 				>La confirmación de la contraseña es requerida</small
 			>
 		</article>
-		<button type="button" class="sign-up__button" (click)="signUp()">
+		<button type="submit" class="sign-up__button" (click)="signUp()">
 			Regístrarse
 		</button>
 
