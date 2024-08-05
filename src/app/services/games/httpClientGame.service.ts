@@ -19,7 +19,7 @@ export class HttpClientGameService {
 
 	getGames(): Observable<GameType[]> {
 		return this.http
-			.get<GameType[]>(this.gamesUrl)
+			.get<GameType[]>(this.gamesUrl, this.httpOptions)
 			.pipe(catchError(this.handleError<GameType[]>('getGames', [])));
 	}
 

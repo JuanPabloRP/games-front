@@ -4,7 +4,7 @@
 	list-style: none;
 	width: 100%;
 	padding: 0;
-	color: var(--color-dark);
+	color: var(--color-white);
 
 	&__title {
 		font-size: 24px;
@@ -37,33 +37,33 @@
 
 	&__anchor {
 		padding: 10px;
-		border: 1px var(--color-warning) solid;
+		border: none;
 		border-radius: 5px;
-		background-color: var(--color-light);
-		color: var(--color-warning);
+		background-color: var(--rc-color-secondary700);
+		color: var(--rc-color-warning);
 		font-size: 16px;
 		cursor: pointer;
 		outline: none;
 	}
 
 	&__anchor:hover {
-		background-color: var(--color-warning);
-		color: var(--color-light);
+		background-color: var(--rc-color-warning);
+		color: var(--rc-color-secondary700);
 	}
 
 	&__button {
 		padding: 10px;
-		border: 1px var(--color-danger) solid;
 		border-radius: 5px;
-		background-color: var(--color-light);
-		color: var(--color-danger);
+		border: none;
+		background-color: var(--rc-color-secondary300);
+		color: var(--rc-color-primary);
 		font-size: 16px;
 		cursor: pointer;
 		outline: none;
 
 		&:hover {
-			background-color: var(--color-danger);
-			color: var(--color-light);
+			background-color: var(--rc-color-primary);
+			color: var(--rc-color-secondary300);
 		}
 	}
 }

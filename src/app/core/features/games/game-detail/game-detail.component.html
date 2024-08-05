@@ -1,3 +1,6 @@
+<main class="game-detail-container">
+
+
 <button type="button" (click)="goBack()" class="back-button">
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
@@ -17,7 +20,7 @@
 	</svg>
 </button>
 <!-- <ng-container *ngIf="game; else loading"> -->
-<div *ngIf="loading$ | async">Cargando...</div>
+<ng-template *ngIf="loading$ | async">Cargando...</ng-template>
 <section *ngIf="game" class="game-detail">
 	<span class="game-detail-span">ID: {{ game.id }}</span>
 
@@ -29,7 +32,6 @@
 			[formControl]="name"
 			placeholder="name"
 			class="game-detail__input"
-			
 		/>
 	</article>
 	<article class="game-detail__input-container">
@@ -40,7 +42,6 @@
 			[formControl]="description"
 			placeholder="description"
 			class="game-detail__input"
-			
 		></textarea>
 	</article>
 
@@ -52,7 +53,6 @@
 			[formControl]="activePlayers"
 			placeholder="Jugadores activos"
 			class="game-detail__input"
-			
 		/>
 	</article>
 	<footer class="game-detail__footer">
@@ -72,10 +72,4 @@
 		</button>
 	</footer>
 </section>
-
-<!-- </ng-container> -->
-
-<!-- <ng-template #loading>
-	<h1>Cargando...</h1>
-</ng-template>
--->
+</main>

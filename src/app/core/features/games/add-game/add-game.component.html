@@ -1,27 +1,36 @@
 <div class="add-form">
 	<h2 class="add-form__title">Agregar un nuevo juego</h2>
-	<section class="add-form__input-container">
-		<input
-			type="text"
-			name="name"
-			[formControl]="name"
-			placeholder="Nombre"
-			class="add-form__input"
-		/>
-		<textarea
-			type="text"
-			name="description"
-			[formControl]="description"
-			placeholder="Descripcion"
-			class="add-form__input"
-		></textarea>
-		<input
-			type="number"
-			name="activePlayers"
-			[formControl]="activePlayers"
-			placeholder="Jugadores activos"
-			class="add-form__input"
-		/>
+	<section class="add-form__inputs-container">
+		<section class="add-form__label">
+			<label for="name" class="add-form__label">Nombre</label>
+			<input
+				type="text"
+				name="name"
+				[formControl]="name"
+
+				class="add-form__input"
+			/>
+		</section>
+		<section class="add-form__label">
+			<label for="description" class="add-form__label">Descripción</label>
+			<textarea
+				type="text"
+				name="description"
+				[formControl]="description"
+				class="add-form__input"
+			></textarea>
+		</section>
+		<section class="add-form__label">
+			<label for="activePlayers" class="add-form__label"
+				>Jugadores activos</label
+			>
+			<input
+				type="number"
+				name="activePlayers"
+				[formControl]="activePlayers"
+				class="add-form__input"
+			/>
+		</section>
 		<button
 			class="add-form__button"
 			(click)="
