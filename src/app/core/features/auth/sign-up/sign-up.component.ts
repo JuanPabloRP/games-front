@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormControl } from '@angular/forms';
+import {
+	ReactiveFormsModule,
+	FormControl,
+	FormGroup,
+	FormBuilder,
+	Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { Store } from '@ngrx/store';
@@ -18,20 +24,26 @@ import * as UserSelectors from 'src/app/store/selectors/user.selectors';
 	imports: [CommonModule, ReactiveFormsModule],
 })
 export class SignUpComponent implements OnInit {
-	public user = new FormControl('');
-	public password = new FormControl('');
-	public passwordConfirmation = new FormControl('');
+	signUpForm: FormGroup = this.formBuilder.group({
+		username: ['', [Validators.required, Validators.minLength(5)]],
+		password: ['', [Validators.required, Validators.minLength(8)]],
+		passwordConfirmation: ['', [Validators.required, Validators.minLength(8)]],
+	});
+
 	isAuthenticated: boolean = false;
 	loading: boolean = false;
-	
+	error: string = '';
+	submitted: boolean = false;
+
 	constructor(
 		private store: Store,
 		private router: Router,
-		private authService: AuthService
+		private authService: AuthService,
+		private formBuilder: FormBuilder
 	) {
-		this.store
-			.select(UserSelectors.selectLoading)
-			.subscribe((res) => (this.loading = res));
+		this.getLoading();
+
+		this.getError();
 	}
 
 	ngOnInit() {
@@ -41,36 +53,79 @@ export class SignUpComponent implements OnInit {
 	}
 
 	signUp() {
-		if (!this.checkPassword()) {
-			// Mostrar error
-			console.log('Error, las contraseñas son diferentes');
+		this.submitted = true;
+		const username = this.signUpForm.get('username')?.value;
+		const password = this.signUpForm.get('password')?.value;
+		const passwordConfirmation = this.signUpForm.get(
+			'passwordConfirmation'
+		)?.value;
+
+		if (!username || !password || !passwordConfirmation) {
+			console.log({ username, password, passwordConfirmation });
+			this.setError({ error: 'Error, no están todos los datos' });
 			return;
 		}
-		const newUser: Partial<UserType> = {
+
+		if (!this.checkPassword(password, passwordConfirmation)) {
+			this.setError({
+				error: 'Error, la contraseña y la confimación son diferentes',
+			});
+			return;
+		}
+
+		if (!this.signUpForm.valid) {
+			this.setError({
+				error: 'Error, los campos no cumplen con todas las condiciones',
+			});
+			return;
+		}
+
+		const newUser: UserType = {
 			id: Math.floor(Math.random() * 10000000000),
-			username: this.user.value!,
-			password: this.password.value!,
+			username: username,
+			password: password,
 			role: USER_ROLE.USER,
 			isAuthenticated: false,
 		};
-		this.store.dispatch(UserActions.signUp({ user: newUser }));
 
+		this.setUserActive({ user: newUser });
 		this.clearFields();
-		this.store
-			.select(UserSelectors.selectError)
-			.subscribe((error) => console.log(error)); // Mostrar bien el error al usuario (después uso toast o algo asi xd)
-
-		return;
+		this.getError();
 	}
 
-	private checkPassword() {
-		return this.password.value === this.passwordConfirmation.value;
+	// TODO cambiar este método
+	private checkPassword(password: string, passwordConfirmation: string) {
+		return password === passwordConfirmation;
+	}
+
+	goToSignIn() {
+		this.router.navigate(['/auth/signin']);
+	}
+
+	setUserActive({ user }: { user: UserType }) {
+		this.store.dispatch(UserActions.signUp({ user }));
+	}
+
+	getLoading() {
+		this.store
+			.select(UserSelectors.selectLoading)
+			.subscribe((res) => (this.loading = res));
+	}
+
+	setError({ error }: { error: string }) {
+		this.store.dispatch(UserActions.signUpFailure({ error }));
+	}
+
+	getError() {
+		return this.store
+			.select(UserSelectors.selectError)
+			.subscribe((res) => (this.error = res));
 	}
 
 	// No hace falta pero ahi la voy a dejar por si algo
 	clearFields(): void {
-		this.user.setValue('');
-		this.password.setValue('');
-		this.passwordConfirmation.setValue('');
+		this.signUpForm.get('username')?.setValue('');
+		this.signUpForm.get('password')?.setValue('');
+		this.signUpForm.get('passwordConfirmation')?.setValue('');
 	}
 }

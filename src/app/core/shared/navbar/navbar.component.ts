@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
 	isAuthenticated: boolean = false;
-	user: Partial<UserType> = {} as UserType;
+	user: UserType = {} as UserType;
 
 	constructor(
 		public authService: AuthService,

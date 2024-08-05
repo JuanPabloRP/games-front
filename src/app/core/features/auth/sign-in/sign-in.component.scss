@@ -26,9 +26,13 @@
 		flex-direction: column;
 	}
 
+	&__label {
+		margin-top: 15px;
+	}
+
 	&__input {
 		background-color: inherit;
-		margin-bottom: 10px;
+
 		padding: 10px;
 		width: 100%;
 		border: 1px solid var(--rc-color-secondary300);
@@ -54,16 +58,27 @@
 		border-radius: 5px;
 		cursor: pointer;
 
-		&:hover {
+		&:hover,
+		&:focus {
 			background-color: var(--rc-color-primary600);
 		}
 	}
 
-	&__footer-anchor {
+	&__small {
+		text-align: center;
+		color: var(--rc-color-primary);
+		font-weight: bold;
+	}
+
+	&__footer-button {
+		background-color: inherit;
+		border: none;
+		outline: none;
 		text-decoration: none;
 		color: var(--rc-color-white);
 		font-weight: bolder;
 		text-decoration: underline;
+		cursor: pointer;
 	}
 }
 

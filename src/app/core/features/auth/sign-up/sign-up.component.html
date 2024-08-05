@@ -1,5 +1,6 @@
-<section *ngIf="loading">Cargando...</section>
-<section class="sign-up-section" *ngIf="!loading">
+<template *ngIf="loading">Cargando...</template>
+<ng-template *ngIf="error"></ng-template>
+<section class="sign-up-section" *ngIf="!loading || !error">
 	<figure class="sign-up-image-container">
 		<img
 			src="../../../../../assets/svg/register.svg"
@@ -7,16 +8,27 @@
 			class="sign-up-image"
 		/>
 	</figure>
-	<form class="sign-up">
+	<form class="sign-up" [formGroup]="signUpForm">
 		<h1 class="sign-up__title">Registro</h1>
 		<article class="sign-up__input-container">
 			<label for="user" class="sign-up__label">Usuario</label>
 			<input
 				name="user"
-				[formControl]="user"
+				formControlName="username"
 				type="text"
 				class="sign-up__input"
+				minlength="5"
+				required
 			/>
+			<small
+				*ngIf="submitted && signUpForm.get('username')?.errors?.['required']"
+				class="sign-in__"
+				>El usuario es requerido</small
+			>
+			<small
+				*ngIf="submitted && signUpForm.get('username')?.errors?.['minlength']"
+				>El usuario es de minimo 5 carácteres</small
+			>
 		</article>
 		<article class="sign-up__input-container">
 			<label for="user" class="sign-up__label">Contraseña</label>
@@ -24,8 +36,18 @@
 				name="user"
 				type="password"
 				class="sign-up__input"
-				[formControl]="password"
+				formControlName="password"
+				minlength="8"
+				required
 			/>
+			<small
+				*ngIf="submitted && signUpForm.get('password')?.errors?.['required']"
+				>La contraseña es requerida</small
+			>
+			<small
+				*ngIf="submitted && signUpForm.get('password')?.errors?.['minlength']"
+				>La contraseña es de minimo 8 carácteres</small
+			>
 		</article>
 		<article class="sign-up__input-container">
 			<label for="user" class="sign-up__label">Repetir contraseña</label>
@@ -33,18 +55,26 @@
 				name="user"
 				type="password"
 				class="sign-up__input"
-				[formControl]="passwordConfirmation"
+				formControlName="passwordConfirmation"
+				minlength="8"
+				required
 			/>
+			<small
+				*ngIf="submitted && signUpForm.get('passwordConfirmation')?.errors?.['required']"
+				>La confirmación de la contraseña es requerida</small
+			>
 		</article>
 		<button type="button" class="sign-up__button" (click)="signUp()">
 			Regístrarse
 		</button>
 
+		<small *ngIf="error" class="sign-up__small">{{ error }}</small>
+
 		<footer class="sign-up__footer">
 			<span class="sign-up__footer-text">¿Ya tienes una cuenta?, </span>
-			<a routerLink="/auth/signin" class="sign-up__footer-anchor"
-				>Inicia sesión
-			</a>
+			<button (click)="goToSignIn()" class="sign-up__footer-button">
+				Inicia sesión
+			</button>
 		</footer>
 	</form>
 </section>

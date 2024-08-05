@@ -1,4 +1,5 @@
-<section *ngIf="loading">Cargando...</section>
+<ng-template *ngIf="loading">Cargando...</ng-template>
+<ng-template *ngIf="loading">{{ error }}</ng-template>
 <section class="sign-in-section">
 	<figure class="sign-in-image-container">
 		<img
@@ -7,33 +8,54 @@
 			class="sign-in-image"
 		/>
 	</figure>
-	<form class="sign-in">
+
+	<form class="sign-in" [formGroup]="signInForm">
 		<h1 class="sign-in__title">Inicio de sesión</h1>
 		<article class="sign-in__input-container">
 			<label for="user" class="sign-in__label">Usuario</label>
 			<input
-				name="user"
+				name="username"
 				type="text"
 				class="sign-in__input"
-				[formControl]="username"
+				formControlName="username"
 			/>
+			<small
+				*ngIf="submitted && signInForm.get('username')?.errors?.['required']"
+				class="sign-in__"
+				>El usuario es requerido</small
+			>
+			<small
+				*ngIf="submitted &&signInForm.get('username')?.errors?.['minlength']"
+				>El usuario es de minimo 5 carácteres</small
+			>
 		</article>
 		<article class="sign-in__input-container">
 			<label for="user" class="sign-in__label">Contraseña</label>
 			<input
-				name="user"
+				name="password"
 				type="password"
 				class="sign-in__input"
-				[formControl]="password"
+				formControlName="password"
 			/>
+			<small
+				*ngIf=" submitted && signInForm.get('password')?.errors?.['required']"
+				>La contraseña es requerida</small
+			>
+			<small
+				*ngIf="submitted &&signInForm.get('password')?.errors?.['minlength']"
+				>La contraseña es de minimo 8carácteres</small
+			>
 		</article>
 		<button type="button" class="sign-in__button" (click)="signIn()">
 			Inicar sesión
 		</button>
+		<small *ngIf="error" class="sign-in__small">{{ error }}</small>
 
 		<footer class="sign-in__footer">
 			<span class="sign-in__footer-text">¿No tienes una cuenta?, </span>
-			<a routerLink="/auth/signup" class="sign-in__footer-anchor">Regístrate</a>
+			<button class="sign-in__footer-button" (click)="goToSignUp()">
+				Regístrate
+			</button>
 		</footer>
 	</form>
 </section>
