@@ -13,6 +13,7 @@ const routes: Routes = [
 			import('./core/features/games/game-detail/game-detail.component').then(
 				(m) => m.GameDetailComponent
 			),
+		canActivate: [AuthGuard],
 	},
 	{
 		path: 'games',
