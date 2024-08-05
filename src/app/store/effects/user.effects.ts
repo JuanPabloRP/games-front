@@ -33,10 +33,10 @@ export class UserEffects {
 		this.actions$.pipe(
 			ofType(UserActions.signIn),
 			mergeMap((action) =>
-				this.authService.signIn(action.user).pipe(
-					map(() =>
+				this.authService.signIn().pipe(
+					map(({ message }) =>
 						UserActions.signInSuccess({
-							message: 'Ok, se pudo iniciar sesión',
+							message,
 							user: action.user,
 						})
 					),
@@ -57,11 +57,13 @@ export class UserEffects {
 			ofType(UserActions.signUp),
 			mergeMap((action) =>
 				this.authService.signUp(action.user).pipe(
-					map(() => {
+					map(({ user, message }) => {
 						console.log(action.user);
+						console.log({ user, message });
+
 						return UserActions.signUpSuccess({
 							user: action.user,
-							message: 'Ok, se pudo registrar el usuario',
+							message,
 						});
 					}),
 					catchError(() =>
@@ -81,9 +83,9 @@ export class UserEffects {
 			ofType(UserActions.signOut),
 			mergeMap((action) =>
 				this.authService.signOut(action.user).pipe(
-					map(() =>
+					map(({ message }) =>
 						UserActions.signOutSuccess({
-							message: 'Ok, se pudo cerrar sesión',
+							message: message,
 						})
 					),
 					catchError(() =>
