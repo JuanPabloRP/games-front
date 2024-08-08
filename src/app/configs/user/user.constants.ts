@@ -4,3 +4,5 @@ export enum USER_ROLE {
 	USER,
 	GUEST,
 }
+
+export const AUTH_URL_API_CONSTANTS = 'http://localhost:8080/api/v1/auth';
