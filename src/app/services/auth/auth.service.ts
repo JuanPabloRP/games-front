@@ -2,15 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
-import { AUTH_URL_API, UserType } from 'src/app/configs/user';
+import { Observable } from 'rxjs';
+import { AUTH_URL_API_CONSTANTS, UserType } from 'src/app/configs/user';
 import * as UserSelectors from 'src/app/store/selectors/user.selectors';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class AuthService {
-	private userUrlApi: string = AUTH_URL_API;
+
 	private isAuthenticated: boolean = false;
 
 	constructor(
@@ -42,30 +42,32 @@ export class AuthService {
 	public signUp(
 		user: UserType
 	): Observable<{ user: UserType; message: string }> {
-		this.userUrlApi = `${AUTH_URL_API}/check`;
+	
 		return this.httpClient.post<{ user: UserType; message: string }>(
-			this.userUrlApi,
+			`${AUTH_URL_API_CONSTANTS}/check`,
 			user
 		);
 	}
 
 	public signIn(): Observable<{ message: string; user: UserType }> {
-		this.userUrlApi = `${AUTH_URL_API}/check`;
+		
 
 		return this.httpClient.get<{ message: string; user: UserType }>(
-			this.userUrlApi
+			`${AUTH_URL_API_CONSTANTS}/check`
 		);
 	}
 
 	public signOut(user: UserType): Observable<{ message: string }> {
-		this.userUrlApi = `${AUTH_URL_API}/check`;
-
-		return this.httpClient.post<{ message: string }>(this.userUrlApi, user);
+	
+		return this.httpClient.post<{ message: string }>(
+			`${AUTH_URL_API_CONSTANTS}/check`,
+			user
+		);
 	}
 
 	public getUser(): Observable<UserType> {
-		this.userUrlApi = '';
-
-		return this.httpClient.get<UserType>(this.userUrlApi);
+	
+	
+		return this.httpClient.get<UserType>(`${AUTH_URL_API_CONSTANTS}/check`);
 	}
 }
